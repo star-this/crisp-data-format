@@ -1,0 +1,269 @@
+================================================================================
+Prose zone
+================================================================================
+
+@prose:readme
+  # Hello World
+
+  This is **markdown** content.
+@end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (prose_zone
+      (prose_zone_marker
+        (zone_name))
+      (prose_content
+        (prose_line)
+        (prose_line))
+      (zone_end))))
+
+================================================================================
+Prose zone with hints
+================================================================================
+
+@prose:docs [format=gfm, lang=en-US]
+  Content here.
+@end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (prose_zone
+      (prose_zone_marker
+        (zone_name)
+        (hints
+          (hint
+            (identifier)
+            (identifier))
+          (hint
+            (identifier)
+            (identifier))))
+      (prose_content
+        (prose_line))
+      (zone_end))))
+
+================================================================================
+Table zone
+================================================================================
+
+@table:users [id:int, name:str, active:bool]
+  1	Alice	true
+  2	Bob	false
+@end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (table_zone
+      (table_zone_marker
+        (zone_name)
+        (column_definitions
+          (column_definition
+            (identifier)
+            (column_type))
+          (column_definition
+            (identifier)
+            (column_type))
+          (column_definition
+            (identifier)
+            (column_type))))
+      (table_content
+        (table_row
+          (table_cell)
+          (table_cell)
+          (table_cell))
+        (table_row
+          (table_cell)
+          (table_cell)
+          (table_cell)))
+      (zone_end))))
+
+================================================================================
+List zone with strings
+================================================================================
+
+@list:hosts [str]
+  localhost
+  127.0.0.1
+  example.com
+@end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (list_zone
+      (list_zone_marker
+        (zone_name)
+        (list_type
+          (column_type)))
+      (list_content
+        (list_item)
+        (list_item)
+        (list_item))
+      (zone_end))))
+
+================================================================================
+List zone with integers
+================================================================================
+
+@list:primes [int]
+  2
+  3
+  5
+  7
+@end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (list_zone
+      (list_zone_marker
+        (zone_name)
+        (list_type
+          (column_type)))
+      (list_content
+        (list_item)
+        (list_item)
+        (list_item)
+        (list_item))
+      (zone_end))))
+
+================================================================================
+List zone with continuation
+================================================================================
+
+@list:items [str]
+  simple item
+  |multi-line
+  |item here
+@end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (list_zone
+      (list_zone_marker
+        (zone_name)
+        (list_type
+          (column_type)))
+      (list_content
+        (list_item)
+        (list_continuation)
+        (list_continuation))
+      (zone_end))))
+
+================================================================================
+Raw zone
+================================================================================
+
+@raw:template [lang=html]
+<div>
+  {{ content }}
+</div>
+@end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (raw_zone
+      (raw_zone_marker
+        (zone_name)
+        (hints
+          (hint
+            (identifier)
+            (identifier))))
+      (raw_content
+        (raw_line)
+        (raw_line)
+        (raw_line))
+      (zone_end))))
+
+================================================================================
+Seq zone
+================================================================================
+
+@seq:messages
+  [message role=user]
+    Hello
+  [/message]
+
+  [message role=assistant]
+    Hi there!
+  [/message]
+@end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (seq_zone
+      (seq_zone_marker
+        (zone_name))
+      (seq_content
+        (seq_entry
+          (entry_open
+            (identifier)
+            (entry_attribute
+              (identifier)
+              (identifier)))
+          (entry_content
+            (seq_text))
+          (entry_close
+            (identifier)))
+        (seq_entry
+          (entry_open
+            (identifier)
+            (entry_attribute
+              (identifier)
+              (identifier)))
+          (entry_content
+            (seq_text))
+          (entry_close
+            (identifier))))
+      (zone_end))))
+
+================================================================================
+Seq zone with multiple attributes
+================================================================================
+
+@seq:events
+  [event type=login timestamp=2026-02-02T10:00:00Z count=5]
+    User logged in
+  [/event]
+@end
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (seq_zone
+      (seq_zone_marker
+        (zone_name))
+      (seq_content
+        (seq_entry
+          (entry_open
+            (identifier)
+            (entry_attribute
+              (identifier)
+              (identifier))
+            (entry_attribute
+              (identifier)
+              (datetime))
+            (entry_attribute
+              (identifier)
+              (number
+                (integer))))
+          (entry_content
+            (seq_text))
+          (entry_close
+            (identifier))))
+      (zone_end))))

@@ -1,0 +1,337 @@
+================================================================================
+Data zone with scalar values
+================================================================================
+
+@data:config
+  name = "example"
+  count = 42
+  ratio = 3.14
+  enabled = true
+  disabled = false
+  missing = ~
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (key_value
+        (key
+          (bare_key))
+        (string
+          (basic_string)))
+      (key_value
+        (key
+          (bare_key))
+        (number
+          (integer)))
+      (key_value
+        (key
+          (bare_key))
+        (number
+          (float)))
+      (key_value
+        (key
+          (bare_key))
+        (boolean))
+      (key_value
+        (key
+          (bare_key))
+        (boolean))
+      (key_value
+        (key
+          (bare_key))
+        (null)))))
+
+================================================================================
+Data zone with table header
+================================================================================
+
+@data:config
+  [server]
+  host = "localhost"
+  port = 8080
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (table_header
+        (key_path
+          (key
+            (bare_key))))
+      (key_value
+        (key
+          (bare_key))
+        (string
+          (basic_string)))
+      (key_value
+        (key
+          (bare_key))
+        (number
+          (integer))))))
+
+================================================================================
+Data zone with nested table
+================================================================================
+
+@data:config
+  [server.database]
+  name = "mydb"
+  pool_size = 10
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (table_header
+        (key_path
+          (key
+            (bare_key))
+          (key
+            (bare_key))))
+      (key_value
+        (key
+          (bare_key))
+        (string
+          (basic_string)))
+      (key_value
+        (key
+          (bare_key))
+        (number
+          (integer))))))
+
+================================================================================
+Data zone with array of tables
+================================================================================
+
+@data:config
+  [[routes]]
+  path = "/api"
+  method = "GET"
+
+  [[routes]]
+  path = "/users"
+  method = "POST"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (array_table_header
+        (key_path
+          (key
+            (bare_key))))
+      (key_value
+        (key
+          (bare_key))
+        (string
+          (basic_string)))
+      (key_value
+        (key
+          (bare_key))
+        (string
+          (basic_string)))
+      (array_table_header
+        (key_path
+          (key
+            (bare_key))))
+      (key_value
+        (key
+          (bare_key))
+        (string
+          (basic_string)))
+      (key_value
+        (key
+          (bare_key))
+        (string
+          (basic_string))))))
+
+================================================================================
+Data zone with arrays
+================================================================================
+
+@data:config
+  numbers = [1, 2, 3]
+  strings = ["a", "b", "c"]
+  nested = [[1, 2], [3, 4]]
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (key_value
+        (key
+          (bare_key))
+        (array
+          (number
+            (integer))
+          (number
+            (integer))
+          (number
+            (integer))))
+      (key_value
+        (key
+          (bare_key))
+        (array
+          (string
+            (basic_string))
+          (string
+            (basic_string))
+          (string
+            (basic_string))))
+      (key_value
+        (key
+          (bare_key))
+        (array
+          (array
+            (number
+              (integer))
+            (number
+              (integer)))
+          (array
+            (number
+              (integer))
+            (number
+              (integer))))))))
+
+================================================================================
+Data zone with inline table
+================================================================================
+
+@data:config
+  point = { x = 10, y = 20 }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (key_value
+        (key
+          (bare_key))
+        (inline_table
+          (inline_key_value
+            (key
+              (bare_key))
+            (number
+              (integer)))
+          (inline_key_value
+            (key
+              (bare_key))
+            (number
+              (integer))))))))
+
+================================================================================
+Data zone with reference
+================================================================================
+
+@data:defaults
+  timeout = 30
+
+@data:production
+  @ref defaults
+  host = "prod.example.com"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (key_value
+        (key
+          (bare_key))
+        (number
+          (integer)))))
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (reference
+        (zone_name))
+      (key_value
+        (key
+          (bare_key))
+        (string
+          (basic_string))))))
+
+================================================================================
+Data zone with comments
+================================================================================
+
+@data:config
+  # This is a comment
+  name = "test"  # Inline comment
+  count = 42
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (comment)
+      (key_value
+        (key
+          (bare_key))
+        (string
+          (basic_string))
+        (comment))
+      (key_value
+        (key
+          (bare_key))
+        (number
+          (integer))))))
+
+================================================================================
+Data zone with datetime
+================================================================================
+
+@data:events
+  created = 2026-02-02T10:30:00Z
+  date_only = 2026-02-02
+  time_only = 10:30:00
+  duration = P1DT2H30M
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (key_value
+        (key
+          (bare_key))
+        (datetime))
+      (key_value
+        (key
+          (bare_key))
+        (date))
+      (key_value
+        (key
+          (bare_key))
+        (time))
+      (key_value
+        (key
+          (bare_key))
+        (duration)))))

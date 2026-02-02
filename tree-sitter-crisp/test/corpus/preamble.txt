@@ -1,0 +1,104 @@
+================================================================================
+Simple preamble
+================================================================================
+
+%crisp 1.0
+
+@data:config
+  key = "value"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preamble
+    (directive
+      (directive_name)
+      (directive_value)))
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (key_value
+        (key
+          (bare_key))
+        (string
+          (basic_string))))))
+
+================================================================================
+Preamble with multiple directives
+================================================================================
+
+%crisp 1.0
+%title "My Document"
+%author "Alice"
+%created 2026-02-02T10:30:00Z
+
+@data:config
+  name = "test"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preamble
+    (directive
+      (directive_name)
+      (directive_value))
+    (directive
+      (directive_name)
+      (directive_value
+        (string
+          (basic_string))))
+    (directive
+      (directive_name)
+      (directive_value
+        (string
+          (basic_string))))
+    (directive
+      (directive_name)
+      (directive_value)))
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (key_value
+        (key
+          (bare_key))
+        (string
+          (basic_string))))))
+
+================================================================================
+Preamble with arrays
+================================================================================
+
+%crisp 1.0
+%tags ["alpha", "beta", "gamma"]
+
+@data:config
+  x = 1
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preamble
+    (directive
+      (directive_name)
+      (directive_value))
+    (directive
+      (directive_name)
+      (directive_value
+        (array
+          (string
+            (basic_string))
+          (string
+            (basic_string))
+          (string
+            (basic_string))))))
+  (zone
+    (data_zone
+      (data_zone_marker
+        (zone_name))
+      (key_value
+        (key
+          (bare_key))
+        (number
+          (integer))))))

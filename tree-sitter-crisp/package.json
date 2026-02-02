@@ -1,0 +1,71 @@
+{
+  "name": "tree-sitter-crisp",
+  "version": "0.1.0",
+  "description": "Tree-sitter grammar for CRISP (Clear Readable Interchange for Structured Prose)",
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "keywords": [
+    "tree-sitter",
+    "parser",
+    "crisp",
+    "syntax-highlighting",
+    "configuration",
+    "markup"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/star-this/crisp-data-format.git",
+    "directory": "tree-sitter-crisp"
+  },
+  "license": "MIT",
+  "author": "star-this",
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**",
+    "*.wasm"
+  ],
+  "dependencies": {
+    "node-addon-api": "^8.0.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.22.0",
+    "prebuildify": "^6.0.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree-sitter": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp build",
+    "build-wasm": "tree-sitter build --wasm",
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test",
+    "parse": "tree-sitter parse",
+    "prebuildify": "prebuildify --napi --strip"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.crisp",
+      "file-types": [
+        "crisp",
+        "crsp",
+        "crisp-schema"
+      ],
+      "injection-regex": "^crisp$",
+      "highlights": "queries/highlights.scm",
+      "injections": "queries/injections.scm",
+      "locals": "queries/locals.scm",
+      "folds": "queries/folds.scm",
+      "indents": "queries/indents.scm"
+    }
+  ]
+}
