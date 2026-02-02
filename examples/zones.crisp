@@ -1,0 +1,110 @@
+%crisp 1.0
+%title "Zone Types Showcase"
+
+# This file demonstrates all CRISP zone types
+
+@data:configuration
+  app_name = "zone-demo"
+  version = "1.0.0"
+
+@prose:introduction [format=commonmark, lang=en-US]
+  # Zone Types in CRISP
+
+  CRISP supports six zone types, each optimized for different content:
+
+  1. **Data zones** - Structured key-value data (TOML-compatible)
+  2. **Prose zones** - Human-readable Markdown text
+  3. **Table zones** - Typed tabular data (TSV-based)
+  4. **List zones** - Simple typed sequences
+  5. **Raw zones** - Verbatim content preservation
+  6. **Seq zones** - Ordered heterogeneous entries
+
+  Each zone type has specific parsing rules, making the format
+  unambiguous while remaining human-friendly.
+@end
+
+@table:users [id:int, username:str, email:str, active:bool, joined:date]
+	1	alice	alice@example.com	true	2025-01-15
+	2	bob	bob@example.com	true	2025-02-20
+	3	charlie	~	false	2025-03-10
+	4	diana	diana@example.com	true	2025-04-05
+@end
+
+@list:allowed-hosts [str]
+  localhost
+  127.0.0.1
+  example.com
+  *.internal.net
+@end
+
+@list:primes [int]
+  2
+  3
+  5
+  7
+  11
+  13
+  17
+  19
+@end
+
+@list:multiline-items [str]
+  simple item
+  |This is a multi-line item
+  |that spans several lines
+  |using the pipe continuation syntax
+  another simple item
+  |And another
+  |multi-line entry
+@end
+
+@raw:sql-template [lang=sql]
+SELECT
+    u.id,
+    u.username,
+    u.email,
+    COUNT(o.id) as order_count
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id
+WHERE u.active = true
+  AND u.created_at >= :start_date
+GROUP BY u.id, u.username, u.email
+HAVING COUNT(o.id) > :min_orders
+ORDER BY order_count DESC
+LIMIT :limit;
+@end
+
+@seq:events
+  [event type=created timestamp=2026-01-15T09:00:00Z]
+    User account created
+  [/event]
+
+  [event type=login timestamp=2026-01-15T09:05:00Z ip="192.168.1.100"]
+    First login from web browser
+  [/event]
+
+  [event type=action timestamp=2026-01-15T09:10:00Z]
+    [details action=purchase]
+      Item: Premium Subscription
+      Amount: $99.00
+    [/details]
+  [/event]
+
+  [event type=logout timestamp=2026-01-15T10:00:00Z]
+    Session ended normally
+  [/event]
+@end
+
+@prose:conclusion
+  ## Summary
+
+  This document demonstrated all zone types available in CRISP.
+  Each zone type serves a specific purpose:
+
+  - Use **data** for configuration and structured data
+  - Use **prose** for documentation and human text
+  - Use **table** for typed tabular data
+  - Use **list** for simple sequences
+  - Use **raw** for templates and code
+  - Use **seq** for ordered, typed entries like logs or conversations
+@end

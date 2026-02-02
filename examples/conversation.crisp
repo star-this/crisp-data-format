@@ -1,0 +1,96 @@
+%crisp 1.0
+%title "AI Conversation Log"
+%created 2026-02-02T10:00:00Z
+
+@data:metadata
+  model = "gpt-4"
+  session_id = "conv-12345"
+  user_id = "user-789"
+
+  [settings]
+  temperature = 0.7
+  max_tokens = 4096
+
+@seq:messages
+  [message role=system]
+    You are a helpful assistant specialized in explaining complex
+    technical concepts in simple terms. Be concise but thorough.
+  [/message]
+
+  [message role=user timestamp=2026-02-02T10:00:00Z]
+    Can you explain what a hash table is?
+  [/message]
+
+  [message role=assistant timestamp=2026-02-02T10:00:03Z tokens=245]
+    A **hash table** is a data structure that stores key-value pairs
+    for fast lookup.
+
+    ## How it works
+
+    1. You provide a **key** (like a word)
+    2. A **hash function** converts the key to an array index
+    3. The **value** is stored at that index
+
+    ## Example
+
+    ```
+    hash("apple") → 42
+    table[42] = "A red fruit"
+    ```
+
+    ## Why it's fast
+
+    Looking up a value is O(1) on average because you:
+    - Hash the key (instant)
+    - Jump directly to that array position (instant)
+
+    No searching through the entire collection!
+  [/message]
+
+  [message role=user timestamp=2026-02-02T10:01:00Z]
+    What happens when two keys hash to the same index?
+  [/message]
+
+  [message role=assistant timestamp=2026-02-02T10:01:02Z tokens=189]
+    Great follow-up! This is called a **collision**.
+
+    ## Common solutions
+
+    ### 1. Chaining
+    Each index stores a linked list. Colliding items are added to the list.
+
+    ```
+    table[42] → ["apple": "red fruit"] → ["orange": "citrus"]
+    ```
+
+    ### 2. Open Addressing
+    If the slot is taken, probe for the next empty slot.
+
+    ```
+    hash("apple") → 42 (taken)
+    try 43... (taken)
+    try 44... (empty!) → store here
+    ```
+
+    ## Performance impact
+
+    With good hash functions and proper sizing, collisions are rare
+    and performance stays near O(1).
+  [/message]
+
+  [message role=user timestamp=2026-02-02T10:02:00Z]
+    Thanks! That was really clear.
+  [/message]
+
+  [message role=assistant timestamp=2026-02-02T10:02:01Z tokens=32]
+    You're welcome! Hash tables are fundamental to many things you
+    use daily - dictionaries in Python, objects in JavaScript,
+    database indexes, and caches. Happy coding!
+  [/message]
+@end
+
+@data:summary
+  total_messages = 6
+  total_tokens = 466
+  duration_seconds = 121
+  topics = ["data structures", "hash tables", "collisions"]
