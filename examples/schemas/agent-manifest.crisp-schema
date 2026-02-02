@@ -1,0 +1,70 @@
+%crisp 1.0
+%schema-version 1.0
+%title "Agent Manifest Schema"
+
+@data:schema
+  # Document-level constraints
+  [document]
+  required_zones = ["agent", "system-prompt"]
+
+  # Agent configuration zone
+  [zones.agent]
+  type = "data"
+  required = true
+
+  [zones.agent.fields.name]
+  type = "string"
+  required = true
+  pattern = "^[a-z][a-z0-9-]*$"
+  min_length = 1
+  max_length = 64
+
+  [zones.agent.fields.version]
+  type = "string"
+  required = true
+  format = "semver"
+
+  [zones.agent.fields.description]
+  type = "string"
+  required = false
+  max_length = 500
+
+  # System prompt zone
+  [zones.system-prompt]
+  type = "prose"
+  required = true
+  min_length = 50
+
+  # Optional supported domains table
+  [zones.supported-domains]
+  type = "table"
+  required = false
+
+  [[zones.supported-domains.columns]]
+  name = "id"
+  type = "integer"
+  unique = true
+  nullable = false
+
+  [[zones.supported-domains.columns]]
+  name = "domain"
+  type = "string"
+  nullable = false
+
+  [[zones.supported-domains.columns]]
+  name = "confidence"
+  type = "float"
+  min = 0.0
+  max = 1.0
+
+  [[zones.supported-domains.columns]]
+  name = "notes"
+  type = "string"
+  nullable = true
+
+  # Optional keywords list
+  [zones.keywords]
+  type = "list"
+  required = false
+  min_length = 1
+  max_length = 20

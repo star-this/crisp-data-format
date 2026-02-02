@@ -1,0 +1,97 @@
+%crisp 1.0
+%title "Data Types Showcase"
+
+# This file demonstrates all CRISP data types
+
+@data:scalars
+  # Strings
+  basic_string = "Hello, World!"
+  escaped_string = "Line 1\nLine 2\tTabbed"
+  unicode_string = "Emoji: \u{1F600} and \u0041"
+  literal_string = 'C:\Users\name\Documents'
+  regex_pattern = '^[a-z]+\d*$'
+
+  multiline_basic = """
+    This is a multiline string.
+    Leading whitespace is stripped based on closing quotes.
+      This line has extra indent.
+    """
+
+  multiline_literal = '''
+    No escape processing here.
+    \n is literal backslash-n.
+    Perfect for code or regex.
+    '''
+
+  # Integers
+  decimal = 42
+  negative = -17
+  positive = +99
+  hex = 0xDEAD_BEEF
+  octal = 0o755
+  binary = 0b1010_1010
+  with_separators = 1_000_000
+
+  # Floats
+  pi = 3.14159
+  negative_float = -0.001
+  scientific = 6.022e23
+  neg_exponent = 1.6e-19
+  positive_infinity = inf
+  negative_infinity = -inf
+  not_a_number = nan
+
+  # Booleans
+  enabled = true
+  disabled = false
+
+  # Null
+  missing_value = ~
+
+  # DateTime types
+  full_datetime = 2026-02-02T10:30:00Z
+  with_offset = 2026-02-02T10:30:00-05:00
+  local_datetime = 2026-02-02T10:30:00
+  date_only = 1990-05-15
+  time_only = 07:30:00
+  precise_time = 14:30:00.123456
+  duration = P1DT2H30M
+  short_duration = PT30S
+
+@data:arrays
+  integers = [1, 2, 3, 4, 5]
+  strings = ["alpha", "beta", "gamma"]
+  mixed = [1, "two", true, ~]
+  nested = [[1, 2], [3, 4], [5, 6]]
+  empty = []
+
+  multiline = [
+    "phoenix",
+    "ecto",
+    "jason",
+  ]
+
+@data:tables
+  # Inline tables
+  point = { x = 10, y = 20 }
+  person = { name = "Alice", age = 30 }
+
+  # Standard table sections
+  [server]
+  host = "localhost"
+  port = 8080
+
+  [server.database]
+  name = "myapp"
+  pool_size = 10
+
+  # Array of tables
+  [[products]]
+  name = "Widget"
+  price = 9.99
+  tags = ["sale", "popular"]
+
+  [[products]]
+  name = "Gadget"
+  price = 24.99
+  tags = ["new"]

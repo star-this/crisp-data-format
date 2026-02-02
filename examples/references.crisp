@@ -1,0 +1,55 @@
+%crisp 1.0
+%title "Zone References Example"
+
+# Demonstrating @ref for configuration inheritance
+
+@data:defaults
+  timeout = 30
+  retries = 3
+  log_level = "info"
+  max_connections = 100
+
+  [database]
+  pool_size = 5
+  timeout = 5000
+
+@data:development
+  @ref defaults
+  log_level = "debug"
+  debug = true
+
+  [server]
+  host = "localhost"
+  port = 3000
+
+@data:staging
+  @ref defaults
+  log_level = "info"
+
+  [server]
+  host = "staging.example.com"
+  port = 8080
+
+  [database]
+  pool_size = 10
+  host = "staging-db.example.com"
+
+@data:production
+  @ref defaults
+  timeout = 60
+  retries = 5
+  log_level = "warn"
+  max_connections = 1000
+
+  [server]
+  host = "0.0.0.0"
+  port = 443
+
+  [database]
+  pool_size = 50
+  host = "prod-db.example.com"
+  timeout = 10000
+
+  [cache]
+  enabled = true
+  ttl = 3600

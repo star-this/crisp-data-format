@@ -1,0 +1,21 @@
+%crisp 1.0
+%title "Simple Example"
+%author "CRISP Examples"
+
+@data:config
+  name = "my-app"
+  version = "1.0.0"
+  debug = false
+  port = 8080
+
+@prose:readme
+  # My Application
+
+  This is a simple example of a CRISP document.
+
+  ## Features
+
+  - Clean syntax
+  - Human readable
+  - Machine parseable
+@end
